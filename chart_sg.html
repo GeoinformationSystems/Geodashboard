@@ -1,0 +1,233 @@
+<head>
+    <!--Load plotly.js into the DOM -->
+    <script src='https://cdn.plot.ly/plotly-2.9.0.min.js'></script>
+    </head>
+    <body>
+    <div>
+    <input type="checkbox" id="l5" onclick="choose(this)">
+    <label for="landsat5">Landsat 5</label>
+    <input type="checkbox" id="l6" onclick="choose(this)">
+    <label for="landsat6">Landsat 6</label>
+    <input type="checkbox" id="l7" onclick="choose(this)">
+    <label for="landsat7">Landsat 7</label>
+    </div>
+    <fieldset>
+    <div>
+    <input type="radio" id="om" name="Quality Metric" value="Omission" onclick="choose(this)">
+    <label for="om"> Omission</label> </div>
+    <div> <input type="radio" id="com" name="Quality Metric" value="Comission" onclick="choose(this)">
+    <label for="com"> Comission</label></div>
+    <div> <input type="radio" id="qaa" name="Quality Metric" value="Quantitative attribute accuracy" onclick="choose(this)">
+    <label for="qaa"> Quantitative attribute accuracy</label></div>
+    <div> <input type="radio" id="tcc" name="Quality Metric" value="Thematic classification correctness" onclick="choose(this)">
+    <label for="tcc"> Thematic classification correctness</label></div>
+    </fieldset>
+    <div id='myDiv'>
+    <!--Plotly chart will be drawn inside this DIV -->
+    </div>
+    </body>
+
+    <script>
+        var sat5om = {
+x: ['Omission'],
+y: [98],
+name: 'Landsat 5',
+type: 'bar',
+marker: {
+color: 'rgb(118,128,100)',
+}
+};
+var sat5com = {
+x: ['Comission'],
+y: [63],
+name: 'Landsat 5',
+type: 'bar',
+marker: {
+color: 'rgb(118,128,100)',
+}
+};
+var sat5qaa = {
+x: ['Quantitative attribute accuracy'],
+y: [84],
+name: 'Landsat 5',
+type: 'bar',
+marker: {
+color: 'rgb(118,128,100)',
+}
+};
+var sat5tcc = {
+x: ['Thematic classification correctness'],
+y: [76],
+name: 'Landsat 5',
+type: 'bar',
+marker: {
+color: 'rgb(118,128,100)',
+}
+};
+var sat6om = {
+x: ['Omission'],
+y: [76],
+name: 'Landsat 6',
+type: 'bar',
+marker: {
+color: 'rgb(128,28,140)',
+}
+};
+var sat6com = {
+x: ['Comission'],
+y: [67],
+name: 'Landsat 6',
+type: 'bar',
+marker: {
+color: 'rgb(128,28,140)',
+}
+};
+var sat6qaa = {
+x: ['Quantitative attribute accuracy'],
+y: [71],
+name: 'Landsat 6',
+type: 'bar',
+marker: {
+color: 'rgb(128,28,140)',
+}
+};
+var sat6tcc = {
+x: ['Thematic classification correctness'],
+y: [90],
+name: 'Landsat 6',
+type: 'bar',
+marker: {
+color: 'rgb(128,28,140)',
+}
+};
+var sat7om = {
+x: ['Omission'],
+y: [98],
+name: 'Landsat 7',
+type: 'bar',
+marker: {
+color: 'rgb(28,88,80)',
+}
+};
+var sat7com = {
+x: ['Comission'],
+y: [48],
+name: 'Landsat 7',
+type: 'bar',
+marker: {
+color: 'rgb(28,88,80)',
+}
+};
+var sat7qaa = {
+x: ['Quantitative attribute accuracy'],
+y: [68],
+name: 'Landsat 7',
+type: 'bar',
+marker: {
+color: 'rgb(28,88,80)',
+}
+};
+var sat7tcc = {
+x: ['Thematic classification correctness'],
+y: [89],
+name: 'Landsat 7',
+type: 'bar',
+marker: {
+color: 'rgb(28,88,80)',
+}
+};
+var omission = [];
+var comission = [];
+var quantitative = [];
+var thematic = [];
+var layout = {
+barmode: 'group'
+};
+function choose(e) {
+if (document.getElementById("om").checked) {
+if (document.getElementById("l5").checked && omission.indexOf(sat5om) == -1) {
+omission.push(sat5om);
+} else if (document.getElementById("l5").checked == false && omission.indexOf(sat5om) > -1) {
+var del1 = omission.indexOf(sat5om);
+omission.splice(del1, 1);
+}
+if (document.getElementById("l6").checked && omission.indexOf(sat6om) == -1) {
+omission.push(sat6om);
+} else if (document.getElementById("l6").checked == false && omission.indexOf(sat6om) > -1) {
+var del2 = omission.indexOf(sat6om);
+omission.splice(del2, 1);
+}
+if (document.getElementById("l7").checked && omission.indexOf(sat7om) == -1) {
+omission.push(sat7om);
+} else if (document.getElementById("l7").checked == false && omission.indexOf(sat7om) > -1) {
+var del3 = omission.indexOf(sat7om);
+omission.splice(del3, 1);
+}
+Plotly.newPlot('myDiv', omission, layout);
+}
+if (document.getElementById("com").checked) {
+if (document.getElementById("l5").checked && comission.indexOf(sat5com) == -1) {
+comission.push(sat5com);
+} else if (document.getElementById("l5").checked == false && comission.indexOf(sat5com) > -1) {
+var del1 = comission.indexOf(sat5com);
+comission.splice(del1, 1);
+}
+if (document.getElementById("l6").checked && comission.indexOf(sat6com) == -1) {
+comission.push(sat6com);
+} else if (document.getElementById("l6").checked == false && comission.indexOf(sat6com) > -1) {
+var del2 = comission.indexOf(sat6com);
+comission.splice(del2, 1);
+}
+if (document.getElementById("l7").checked && comission.indexOf(sat7com) == -1) {
+comission.push(sat7com);
+} else if (document.getElementById("l7").checked == false && comission.indexOf(sat7com) > -1) {
+var del3 = comission.indexOf(sat7com);
+comission.splice(del3, 1);
+}
+Plotly.newPlot('myDiv', comission, layout);
+}
+if (document.getElementById("qaa").checked) {
+if (document.getElementById("l5").checked && quantitative.indexOf(sat5qaa) == -1) {
+quantitative.push(sat5qaa);
+} else if (document.getElementById("l5").checked == false && quantitative.indexOf(sat5qaa) > -1) {
+var del1 = quantitative.indexOf(sat5qaa);
+quantitative.splice(del1, 1);
+}
+if (document.getElementById("l6").checked && quantitative.indexOf(sat6qaa) == -1) {
+quantitative.push(sat6qaa);
+} else if (document.getElementById("l6").checked == false && quantitative.indexOf(sat6qaa) > -1) {
+var del2 = quantitative.indexOf(sat6qaa);
+quantitative.splice(del2, 1);
+}
+if (document.getElementById("l7").checked && quantitative.indexOf(sat7qaa) == -1) {
+quantitative.push(sat7qaa);
+} else if (document.getElementById("l7").checked == false && quantitative.indexOf(sat7qaa) > -1) {
+var del3 = quantitative.indexOf(sat7qaa);
+quantitative.splice(del3, 1);
+}
+Plotly.newPlot('myDiv', quantitative, layout);
+}
+if
+(document.getElementById("tcc").checked) {
+if (document.getElementById("l5").checked && thematic.indexOf(sat5tcc) == -1) {
+thematic.push(sat5tcc);
+} else if (document.getElementById("l5").checked == false && thematic.indexOf(sat5tcc) > -1) {
+var del1 = thematic.indexOf(sat5tcc);
+thematic.splice(del1, 1);
+}
+if (document.getElementById("l6").checked && thematic.indexOf(sat6tcc) == -1) {
+thematic.push(sat6tcc);
+} else if (document.getElementById("l6").checked == false && thematic.indexOf(sat6tcc) > -1) {
+var del2 = thematic.indexOf(sat6tcc);
+thematic.splice(del2, 1);
+}
+if (document.getElementById("l7").checked && thematic.indexOf(sat7tcc) == -1) {
+thematic.push(sat7tcc);
+} else if (document.getElementById("l7").checked == false && thematic.indexOf(sat7tcc) > -1) {
+var del3 = thematic.indexOf(sat7tcc);
+thematic.splice(del3, 1);
+}
+Plotly.newPlot('myDiv', thematic, layout);
+}
+}
+    </script>

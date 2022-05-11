@@ -1,0 +1,15 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dqv:   <http://www.w3.org/ns/dqv#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix gkq:   <https://geokur-dmp.geo.tu-dresden.de/quality-register#> .
+
+gkq:qualityRegister skos:label "GeoKur Quality Register"@en;
+    skos:narrower gkq:positionalAccuracy,
+        gkq:temporalQuality,
+        gkq:metaquality,
+        gkq:logicalConsistency,
+        gkq:completeness,
+        gkq:thematicAccuracy,
+        gkq:usabilityElement.
