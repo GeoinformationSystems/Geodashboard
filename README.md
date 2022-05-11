@@ -6,7 +6,7 @@ This geodashboard prototype combines the components (1) Provenance, (2) Spatial 
 
 ## Structure
 
-The Geodashboard Prototype is based on Javascript,  HTML and CSS.
+The Geodashboard Prototype is based on Javascript,  HTML and CSS. The main application can be found in the file _index.html_
 
 ## Contact
 Heiko Figgemeier (heiko.figgemeier@tu-dresden.de)
