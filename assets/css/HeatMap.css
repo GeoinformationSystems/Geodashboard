@@ -1,0 +1,30 @@
+.btn-hm {
+  display: inline-block;
+  margin: 5px;
+  font-size: 10px;
+  padding: 0 5px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 100% auto;
+  color: black;
+  width: 50px;
+  box-shadow: 0 1px 2px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.btn-1 {
+
+  background-image: linear-gradient(to right, #c9461c 0%, #e86b21 30%, #f7bb32 60%, #6ba316 100%);
+}
+
+.btn-2 {
+
+  background-image: linear-gradient(to right, #ffffcc 0%, #c7e9b4 30%, #41b6c4 60%, #1d91c0 100%);
+}
+
+.btn-3 {
+
+  background-image: linear-gradient(to right, #f7f7f7 0%, #bdbdbd 30%, #969696 60%, #737373 100%);
+}

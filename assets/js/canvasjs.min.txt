@@ -1,0 +1,3 @@
+this.canvas.style.position="relative"
+
+normal steht da absolute
