@@ -2,32 +2,68 @@
 <html lang="en">
 
 <head>
-    <!--Load plotly.js into the DOM -->
-    <script src='https://cdn.plot.ly/plotly-2.9.0.min.js'></script>
-    <script src='assets/js/HeatMap.js'></script>
-    <link href="assets/css/HeatMap.css" rel="stylesheet">
-	<meta charset="utf-8" />
+<script src='https://cdn.plot.ly/plotly-2.9.0.min.js'></script>
+<script src='assets/js/HeatMap.js'></script>
+<link href="assets/css/HeatMap.css" rel="stylesheet">
+<meta charset="utf-8" />
+
 </head>
 
-<body>
-    <div> <input type="checkbox" id="l5" onclick="choose(this)"> <label for="landsat5">Landsat 5</label> <input
-            type="checkbox" id="l6" onclick="choose(this)"> <label for="landsat6">Landsat 6</label> <input
-            type="checkbox" id="l7" onclick="choose(this)"> <label for="landsat7">Landsat 7</label> </div>
-    <fieldset>
-        <div> <input type="radio" id="om" name="Quality Metric" value="Omission" onclick="choosem(this)"> <label
-                for="om"> Omission</label> </div>
-        <div> <input type="radio" id="com" name="Quality Metric" value="Comission" onclick="choosem(this)"> <label
-                for="com"> Comission</label></div>
-        <div> <input type="radio" id="qaa" name="Quality Metric" value="Quantitative attribute accuracy"
-                onclick="choosem(this)"> <label for="qaa"> Quantitative attribute accuracy</label></div>
-        <div> <input type="radio" id="tcc" name="Quality Metric" value="Thematic classification correctness"
-                onclick="choosem(this)"> <label for="tcc"> Thematic classification correctness</label></div>
-    </fieldset>
-    <div class="container"> <a class="btn-hm btn-1" onclick="colorchange(this)">Color 1</a> <a class="btn-hm btn-2"
-            onclick="colorchange(this)">Color 2</a> <a class="btn-hm btn-3" onclick="colorchange(this)">Color 3</a> </div>
-    <div id='myDiv'>
-        <!-- Plotly chart will be drawn inside this DIV -->
-    </div>
-</body>
+<body style="font-family: 'Open Sans'; font-size: 13px; width: 97%">
+	<div class="values">
+		<span id=range1> 0 </span> <span> - </span> <span id=range2>
+			100 </span>
+	</div>
+	<div class="wrapper">
 
+		<form>
+				<div class="slider-track" id="slider-track"></div>
+				<input type="range" id="range-a" min="0" max="100" value="0"
+					oninput="rangevalue1()"> <input type="range" id="range-b"
+					min="0" max="100" value="100" oninput="rangevalue2()">
+			
+		</form>
+	</div>
+
+	<div>
+		<input type="checkbox" id="l5" onclick="chooseD(this)"> <label
+			for="landsat5">GPW v4.0</label> <input type="checkbox" id="l6"
+			onclick="chooseD(this)"> <label for="landsat6">WDPA v1.6</label>
+		<input type="checkbox" id="l7" onclick="chooseD(this)"> <label
+			for="landsat7">GAEZ v3.0</label>
+	</div>
+	<fieldset>
+		<div>
+			<input type="checkbox" id="om" name="Quality Metric" value="Omission"
+				onclick="chooseQ(this)"> <label for="om"> Omission as rate</label>
+		</div>
+		<div>
+			<input type="checkbox" id="com" name="Quality Metric"
+				value="Commission" onclick="chooseQ(this)"> <label for="com">
+				Quantitative Attribute Accuracy as R²</label>
+		</div>
+		<div>
+			<input type="checkbox" id="qaa" name="Quality Metric"
+				value="Quantitative attribute accuracy" onclick="chooseQ(this)">
+			<label for="qaa">Quantitative Attribute Accuracy as RMSE</label>
+		</div>
+		<div>
+			<input type="checkbox" id="tcc" name="Quality Metric"
+				value="Thematic classification correctness" onclick="chooseQ(this)">
+			<label for="tcc">Spatial Resolution</label>
+		</div>
+	</fieldset>
+
+	<a class="btn-hm btn-1" onclick="colorchange(this)">Color 1</a>
+	<a class="btn-hm btn-2" onclick="colorchange(this)">Color 2</a>
+	<a class="btn-hm btn-3" onclick="colorchange(this)">Color 3</a>
+	<span id=show> Test </span>
+
+	<div id='myDiv'>
+		<!-- Plotly chart will be drawn inside this DIV -->
+	</div>
+	
+	<!--needs to be down here to access all elements in the js file-->
+	<script src='assets/js/HeatMap.js'></script>
+</body>
 </html>

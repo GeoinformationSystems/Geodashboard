@@ -5,8 +5,3 @@ html, body {
 canvas {
   display: block;
 }
-
-.card-header {
-	background-color: #00C46C;
-	color: black;
-}

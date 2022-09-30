@@ -45,8 +45,7 @@ class Model {
     async get_node_description(node) {
         let select = [
             'SELECT ?description WHERE {',
-            'OPTIONAL {<' + node + '> ?predicate ?definition. }',
-            'FILTER (?predicate = rdfs:comment || ?predicate = skos:definition || ?predicate = dct:description)',
+            'OPTIONAL {<' + node + '> dct:description ?description. }',
             '}'
         ]
         select = this.prefixes.concat(select).join(' ');
@@ -70,9 +69,7 @@ class Model {
         let node_class = []
         for (let binding of response.results.bindings) {
             if (binding.class) node_class.push(binding.class.value)
-
         }
-
         return node_class;
     }
 
@@ -227,6 +224,10 @@ class Model {
             if (max_y > 0) this.graph_layout[node_id].y = dagre_graph.node(node_id).y / max_y
             else this.graph_layout[node_id].y = dagre_graph.node(node_id).y
 
+        }
+
+        for(let node_id of dagre_graph.nodes()) {
+            this.graph_layout[node_id].y = Math.abs(this.graph_layout[node_id].y -1)
         }
         if (Object.keys(this.graph_layout).length == 1) {
             Object.values(this.graph_layout)[0].x = 0.5

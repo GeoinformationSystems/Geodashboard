@@ -1,54 +1,7 @@
-/*------------------------------------------------------------------
-* Bootstrap Simple Admin Template
-* Version: 3.0
-* Author: Alexis Luna
-* Website: https://github.com/alexis-luna/bootstrap-simple-admin-template
--------------------------------------------------------------------*/
-
 @import "../components/navbar/navbar-dropdowns.css";
 @import "../components/sidebar/sidebar-default.css";
 
-/*------------------------------------------------------------------
-# [Color codes]
 
-# teal: #00b5ad
-# olive: #b5cc18
-# violet: #6435c9
-# orange: #f2711c
-# darkgray: darkgray
-# blue: #2185d0
-# grey: #767676
-# */
-
-/*------------------------------------------------------------------
-[Typography]
-
-Body:           1em / "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
-Headers:        2em / "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
-parapgraph:     1em / "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
-
-Notes:  decreasing heading by 0.4em with every subsequent heading level
--------------------------------------------------------------------*/
-
-/*------------------------------------------------------------------
-[Table of contents]
-
-1. Body / #body
-2. Header / #header
-3. Navigation / #navbar
-4. Content / #content
-5. Sidebar / #sidebar
-6. Boxes / .box
-7. Dashboard cards / .card
-8. Miscellaneous
-9. Adjustments to dafault behaviors
-10. Colors / .teal, .olive, .violet, .orange, .darkgray, .blue, .grey
-11. Responsive properties
--------------------------------------------------------------------*/
-
-/*------------------------------------------------------------------
-[1. Body / #body]
-*/
 @font-face {
     font-family: "Lato";
     font-style: normal;
@@ -79,11 +32,12 @@ td {
 }
 
 body {
-    width: 100%;
+    width: 70%;
     height: 100%;
     background: #f4f6fa;
     font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
     font-size: 1rem;
+    margin: auto;
     color: #444;
 }
 
@@ -92,6 +46,11 @@ body {
     width: 100%;
     align-items: stretch;
     overflow-x: hidden
+}
+
+.card-header {
+    background-color: #00C46C;
+    color: black;
 }
 
 #body {
@@ -210,6 +169,8 @@ body {
 
 .card .content {
     padding: 15px 15px 10px 15px;
+    height: 32em;
+    overflow-y: scroll;
 }
 
 .card .content .icon-big {
@@ -462,29 +423,62 @@ table.dataTable>tbody>tr.child ul.dtr-details {
     }
 }
 
-        .info {
-            padding: 6px 8px;
-            font: 14px/16px Arial, Helvetica, sans-serif;
-            background: white;
-            background: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-        }
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
 
-        .info h4 {
-            margin: 0 0 5px;
-            color: #777;
-        }
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
 
-        .legend {
-            line-height: 18px;
-            color: #555;
-        }
+.legend {
+    line-height: 18px;
+    color: #555;
+}
 
-        .legend i {
-            width: 18px;
-            height: 18px;
-            float: left;
-            margin-right: 8px;
-            opacity: 0.7;
-        }
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+#map {
+    height: 40em;
+}
+
+#map_pane {
+    width: 40%;
+}
+
+#tabelle_pane {
+    text-align: left;
+    width: 40%;
+}
+
+#quality_pane {
+    width: 60%;
+}
+
+#provenance_pane {
+    width: 60%;
+}
+
+#button-box {
+    display: inline;
+    padding: 1%;
+    position: relative;
+    left: 30%;
+}
+#dash-title {
+    font-size: 17pt;
+    margin-left: 2%;
+    margin-top: 0.9%;
+}

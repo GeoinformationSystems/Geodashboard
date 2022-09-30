@@ -1,0 +1,17 @@
+.ui-rangeslider .ui-rangeslider-sliders .ui-slider-track {
+	position: absolute;
+	top: 6px;
+	right: 0;
+	left: 0;
+	margin: 0;
+	background-image: linear-gradient(to right, #c9461c 0%, #e86b21 30%, #f7bb32 60%, #6ba316
+		100%);
+}
+
+.ui-slider-bg {
+	position: absolute;
+	right: 0;
+	left: 0;
+	margin: 0;
+	opacity: 0;
+}
