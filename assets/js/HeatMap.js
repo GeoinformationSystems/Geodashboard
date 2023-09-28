@@ -3,8 +3,6 @@ var slider2 = document.getElementById("range-b");
 var slidertrack = document.getElementById("slider-track");
 var display1 = document.getElementById("range1");
 var display2 = document.getElementById("range2");
-var display3 = document.getElementById("show");
-
 
 var xValues = []; //will get Quality Metrix labels
 
@@ -14,80 +12,205 @@ var zValues = []; //will get Dataset values
 
 
 
-var z5 = []; //Dataset array for Dataset A
-var z5fin = []
-var z5om = 41;
-var z5com = 64;
-var z5qaa = 5;
-var z5tcc = 88;
+var zA = []; //Dataset array for Dataset A
+var zAfin = []
+var zAom = 41;
+var zAcom = 64;
+var zAqaa = 5;
+var zAtcc = 25;
 
 //erst alle in ein Array packen, auf Slider Eingabe prüfen (for schleife), output in neues Array
 
-var z6 = []; //Dataset array for Dataset B
-var z6fin = []
-var z6om = 68;
-var z6com = 51;
-var z6qaa = 70;
-var z6tcc = 36;
+var zB = []; //Dataset array for Dataset B
+var zBfin = []
+var zBom = 68;
+var zBcom = 51;
+var zBqaa = 71;
+var zBtcc = 100;
 
-var z7 = []; //Dataset array for Dataset C
-var z7fin = []
-var z7om = 92;
-var z7com = 5;
-var z7qaa = 45;
-var z7tcc = 78;
+var zC = []; //Dataset array for Dataset C
+var zCfin = []
+var zCom = 92;
+var zCcom = 7;
+var zCqaa = 45;
+var zCtcc = 10;
 
+var color11 = 'rgb(201,70,28)';
+var color12 = 'rgb(232,107,33)';
+var color13 = 'rgb(247,187,50)';
+var color14 = 'rgb(107,163,22)';
 
+var color21 = 'rgb(255,255,204)';
+var color22 = 'rgb(199,233,180)';
+var color23 = 'rgb(65,182,196)';
+var color24 = 'rgb(29,145,192)';
 
+var color31 = 'rgb(247,247,247)';
+var color32 = 'rgb(189,189,189)';
+var color33 = 'rgb(150,150,150)';
+var color34 = 'rgb(115,115,115)';
 
 // predefine color gradients to choose from
 var colorscaleValue = [
 
-	[0, '#dddddd'],
+	[0, 'rgb(221,221,221)'],
 
-	[0.4, '#dddddd'],
+	[0.4, 'rgb(221,221,221)'],
 
-	[0.7, '#dddddd'],
+	[0.7, 'rgb(221,221,221)'],
 
-	[1, '#dddddd']
+	[1, 'rgb(221,221,221)']
 
 ];
 var colorscaleValue1 = [
 
 
-	[0, '#c9461c'],
+	[0, color11],
 
-	[0.4, '#e86b21'],
+	[0.4, color12],
 
-	[0.7, '#f7bb32'],
+	[0.7, color13],
 
-	[1, '#6ba316']
+	[1, color14]
 
 ];
 
 var colorscaleValue2 = [
 
-	[0, '#ffffcc'],
+	[0, 'rgb(255,255,204)'],
 
-	[0.4, '#c7e9b4'],
+	[0.4, 'rgb(199,233,180)'],
 
-	[0.7, '#41b6c4'],
+	[0.7, 'rgb(65,182,196)'],
 
-	[1, '#1d91c0']
+	[1, 'rgb(29,145,192)']
 
 ];
 
 var colorscaleValue3 = [
 
-	[0, '#f7f7f7'],
+	[0, 'rgb(247,247,247)'],
 
-	[0.4, '#bdbdbd'],
+	[0.4, 'rgb(189,189,189)'],
 
-	[0.7, '#969696'],
+	[0.7, 'rgb(150,150,150)'],
 
-	[1, '#737373']
+	[1, 'rgb(115,115,115)']
 
 ];
+
+var colorselect = colorscaleValue;
+
+function getRGB(step) {
+
+	var rgb = [0, 0, 0];
+
+	var colorArray1 = colorsplit(colorselect[0][1].substr(4).slice(0, -1));
+	var colorArray2 = colorsplit(colorselect[1][1].substr(4).slice(0, -1));
+	var colorArray3 = colorsplit(colorselect[2][1].substr(4).slice(0, -1));
+	var colorArray4 = colorsplit(colorselect[3][1].substr(4).slice(0, -1));
+
+	var percent = 0;
+
+	if (step == 0) {
+		rgb = colorArray1;
+	}
+	else if (step > 0 && step < 40) {
+		percent = (step * 100 / 39) / 100;
+
+		for (var i = 0; i < 3; i++) {
+			rgb[i] = Math.floor(colorArray1[i] * (1 - percent) + colorArray2[i] * percent);
+		}
+	}
+	else if (step == 40) {
+		rgb = colorArray2;
+	}
+
+	else if (step > 40 && step < 70) {
+		percent = ((step - 41) * 100 / 29) / 100;
+
+		for (var i = 0; i < 3; i++) {
+			rgb[i] = Math.floor(colorArray2[i] * (1 - percent) + colorArray3[i] * percent);
+		}
+	}
+	else if (step == 70) {
+		rgb = colorArray3;
+	}
+	else if (step > 70 && step < 100) {
+		percent = ((step - 71) * 100 / 29) / 100;
+
+		for (var i = 0; i < 3; i++) {
+			rgb[i] = Math.floor(colorArray3[i] * (1 - percent) + colorArray4[i] * percent);
+		}
+
+	}
+	else if (step == 100) {
+		rgb = colorArray4;
+	}
+
+	return rgb;
+}
+
+function colorsplit(colorRaw)//split rgb for calculation
+{
+
+	var colorR = colorRaw.substring(0, colorRaw.indexOf(','));
+	var colorX = colorRaw.substring(colorRaw.indexOf(',') + 1);
+	var colorG = colorX.substring(0, colorX.indexOf(','));
+	var colorB = colorX.substring(colorX.indexOf(',') + 1);
+
+	var result = [];
+	result.push(parseInt(colorR), parseInt(colorG), parseInt(colorB));
+	return result;
+}
+
+function colorinterpol() {
+
+	var mapping = parseInt(slider2.value) - parseInt(slider1.value);
+	var step0 = slider1.value;
+	var step1 = Math.round((40 * mapping / 100) + parseInt(slider1.value));
+	var step2 = Math.round((70 * mapping / 100) + parseInt(slider1.value));
+	var step3 = slider2.value;
+
+	var rgb1 = getRGB(step0);
+	var rgb2 = getRGB(step1);
+	var rgb3 = getRGB(step2);
+	var rgb4 = getRGB(step3);
+
+	colora = 'rgb(' + rgb1[0] + ',' + rgb1[1] + ',' + rgb1[2] + ')';
+	colorb = 'rgb(' + rgb2[0] + ',' + rgb2[1] + ',' + rgb2[2] + ')';
+	colorc = 'rgb(' + rgb3[0] + ',' + rgb3[1] + ',' + rgb3[2] + ')';
+	colord = 'rgb(' + rgb4[0] + ',' + rgb4[1] + ',' + rgb4[2] + ')';
+
+	var colorscaleValuenew = [
+
+
+		[0, colora],
+
+		[0.4, colorb],
+
+		[0.7, colorc],
+
+		[1, colord]
+
+	];
+	map.colorscale = colorscaleValuenew;
+
+}
+
+
+function range1() {
+	if (parseInt(slider2.value) - parseInt(slider1.value) <= 0) {
+		slider1.value = parseInt(slider2.value);
+
+	}
+}
+function range2() {
+	if (parseInt(slider2.value) - parseInt(slider1.value) <= 0) {
+		slider2.value = parseInt(slider1.value);
+
+	}
+}
 
 //seperate values from the data variable for better access
 var map = {
@@ -109,17 +232,27 @@ var map = {
 var data = [map];
 
 var layout = {
+	autosize: false,
+	width: 650,
+	height: 200,
+
+	margin: {
+		t: 20,
+		b: 20
+	
+	},
+
 	annotations: [],
 	xaxis: {
 		ticks: '',
 		side: 'buttom',
 	},
 	yaxis: {
+
 		ticks: '',
 		ticksuffix: ' ',
 	}
 };
-
 
 
 var checked = '';
@@ -147,7 +280,7 @@ function colorchange(b) {
 			b.style.background = "#dddddd";
 			checked = b;
 
-		}
+		} colorselect = colorscaleValue1;
 	}
 	if (b.className == "btn-hm btn-2") {
 		slidertrack.style.backgroundImage = 'linear-gradient(to right, #ffffcc 0%, #c7e9b4 30%, #41b6c4 60%, #1d91c0 100%) ';
@@ -169,7 +302,7 @@ function colorchange(b) {
 			b.style.background = "#dddddd";
 			checked = b;
 
-		}
+		} colorselect = colorscaleValue2;
 	}
 	if (b.className == "btn-hm btn-3") {
 		slidertrack.style.backgroundImage = 'linear-gradient(to right, #f7f7f7 0%, #bdbdbd 30%, #969696 60%, #737373 100%) ';
@@ -184,6 +317,7 @@ function colorchange(b) {
 			b.style.background = "#dddddd";
 			checked = b;
 
+
 		} else {
 
 			map.colorscale = colorscaleValue3;
@@ -191,244 +325,213 @@ function colorchange(b) {
 			b.style.background = "#dddddd";
 			checked = b;
 
-		}
+		} colorselect = colorscaleValue3;
 	}
+
 	Plotly.newPlot('myDiv', data, layout);
 }
 
 
-//add data to the Dataset arrays and x-axis labels depending on selected Quality Metric buttons
+function build() {
+	layout.annotations = [];
 
-function chooseQ(c) {
-	if (document.getElementById("om").checked &&
-		(z5.includes(z5om) == false && z6.includes(z6om) == false && z7.includes(z7om) == false)) {
+	xValues = [];
 
-		layout.annotations = [];
+	yValues = [];
 
-		z5.push(z5om);
-		z6.push(z6om);
-		z7.push(z7om);
-		xValues.push('Omission');
+	zValues = [];
 
-	} else if (document.getElementById("om").checked == false &&
-		(z5.includes(z5om) == true && z6.includes(z6om) == true && z7.includes(z7om) == true)) {
-
-		layout.annotations = [];
-		var del1 = z5.indexOf(z5om);
-		var del2 = z6.indexOf(z6om);
-		var del3 = z7.indexOf(z7om);
-		var del4 = xValues.indexOf('Omission');
-
-		z5.splice(del1, 1);
-		z6.splice(del2, 1);
-		z7.splice(del3, 1);
-		xValues.splice(del4, 1)
-
-	} else if (document.getElementById("com").checked &&
-		(z5.includes(z5com) == false && z6.includes(z6com) == false && z7.includes(z7com) == false)) {
-
-		layout.annotations = [];
-		z5.push(z5com);
-		z6.push(z6com);
-		z7.push(z7com);
-		xValues.push('Commission');
-
-	} else if (document.getElementById("com").checked == false &&
-		(z5.includes(z5com) == true && z6.includes(z6com) == true && z7.includes(z7com) == true)) {
-
-		layout.annotations = [];
-		var del1 = z5.indexOf(z5com);
-		var del2 = z6.indexOf(z6com);
-		var del3 = z7.indexOf(z7com);
-		var del4 = xValues.indexOf('Commission');
-
-		z5.splice(del1, 1);
-		z6.splice(del2, 1);
-		z7.splice(del3, 1);
-		xValues.splice(del4, 1)
-
-	} else if (document.getElementById("qaa").checked &&
-		(z5.includes(z5qaa) == false && z6.includes(z6qaa) == false && z7.includes(z7qaa) == false)) {
-
-		layout.annotations = [];
-		z5.push(z5qaa);
-		z6.push(z6qaa);
-		z7.push(z7qaa);
-		xValues.push('Quant. attr. accuracy');
-
-	} else if (document.getElementById("qaa").checked == false &&
-		(z5.includes(z5qaa) == true && z6.includes(z6qaa) == true && z7.includes(z7qaa) == true)) {
-
-		layout.annotations = [];
-		var del1 = z5.indexOf(z5qaa);
-		var del2 = z6.indexOf(z6qaa);
-		var del3 = z7.indexOf(z7qaa);
-		var del4 = xValues.indexOf('Quant. attr. accuracy');
-
-		z5.splice(del1, 1);
-		z6.splice(del2, 1);
-		z7.splice(del3, 1);
-		xValues.splice(del4, 1)
-
-	} else if (document.getElementById("tcc").checked &&
-		(z5.includes(z5tcc) == false && z6.includes(z6tcc) == false && z7.includes(z7tcc) == false)) {
-
-		layout.annotations = [];
-		z5.push(z5tcc);
-		z6.push(z6tcc);
-		z7.push(z7tcc);
-		xValues.push('Them. class. correctness');
-
-	} else if (document.getElementById("tcc").checked == false &&
-		(z5.includes(z5tcc) == true && z6.includes(z6tcc) == true && z7.includes(z7tcc) == true)) {
-
-		layout.annotations = [];
-		var del1 = z5.indexOf(z5tcc);
-		var del2 = z6.indexOf(z6tcc);
-		var del3 = z7.indexOf(z7tcc);
-		var del4 = xValues.indexOf('Them. class. correctness');
-
-		z5.splice(del1, 1);
-		z6.splice(del2, 1);
-		z7.splice(del3, 1);
-		xValues.splice(del4, 1)
-
-	} for (var i = 0; i < yValues.length; i++) {
-
-		for (var j = 0; j < xValues.length; j++) {
-
-			var result = {
-
-				x: xValues[j],
-
-				y: yValues[i],
-
-				text: zValues[i][j],
-
-				showarrow: false,
-
-				font: {
-					color: 'black'
-				}
-
-			};
-
-			if (result.text != null) {
-				result.text = zValues[i][j];
-				layout.annotations.push(result);
-			}
-		}
-	}
-	Plotly.newPlot('myDiv', data, layout);
-}
-
-// get slider values
-function rangevalue1() {
-
-	/*if (slider2.value < slider1.value) {
-		slider1.value = parseInt(slider2.value);
-	}*/
 	display1.textContent = slider1.value;
-	//chooseD();
-
-}
-
-function rangevalue2() {
-
-	/*if (slider2.value < slider1.value) {
-		slider2.value = parseInt(slider1.value);
-	}*/
 	display2.textContent = slider2.value;
-	//chooseD();
-}
 
-function slider(){
-	//ToDo
-	// Idee: Funktionsaufruf untereinander
-}
+	var zom1 = [zAom, zBom, zCom];
+	var zcom1 = [zAcom, zBcom, zCcom];
+	var zqaa1 = [zAqaa, zBqaa, zCqaa];
+	var ztcc1 = [zAtcc, zBtcc, zCtcc];
+	var zom2 = [];
+	var zcom2 = [];
+	var zqaa2 = [];
+	var ztcc2 = [];
 
-//add Dataset arrays and y-axis labels to the chart depending on checked Dataset buttons
-function chooseD(e) {
-display3.textContent = slider2.value-slider1.value;
-	if (document.getElementById("l5").checked && zValues.includes(z5fin) == false) {
 
-		for (var i = 0; i < z5.length; i++) {
+	for (var i = 0; i < zom1.length; i++) {
 
-			if (z5[i] >= slider1.value && z5[i] <= slider2.value) {
-				z5fin.push(z5[i]);
+		if (zom1[i] >= slider1.value && zom1[i] <= slider2.value) {
+			zom2.push(zom1[i]);
 
-			} else {
-				z5fin.push(null);
-			}
+
+		} else {
+			zom2.push(null);
 		}
+	}
 
-		layout.annotations = [];
-		yValues.push('Dataset A');
-		zValues.push(z5fin);
+	for (var j = 0; j < zcom1.length; j++) {
 
-	} else if (document.getElementById("l5").checked == false && zValues.includes(z5fin) == true) {
+		if (zcom1[j] >= slider1.value && zcom1[j] <= slider2.value) {
+			zcom2.push(zcom1[j]);
 
-		layout.annotations = [];
-		var del1 = yValues.indexOf('Dataset A');
-		var del2 = zValues.indexOf(z5fin);
-		yValues.splice(del1, 1);
-		zValues.splice(del2, 1);
-		z5fin = [];
-		
 
-	}if (document.getElementById("l6").checked && zValues.includes(z6fin) == false) {
-
-		for (var i = 0; i < z6.length; i++) {
-
-			if (z6[i] >= slider1.value && z6[i] <= slider2.value) {
-				z6fin.push(z6[i]);
-
-			} else {
-				z6fin.push(null);
-			}
+		} else {
+			zcom2.push(null);
 		}
+	}
 
-		layout.annotations = [];
-		yValues.push('Dataset B');
-		zValues.push(z6fin);
+	for (var k = 0; k < zqaa1.length; k++) {
 
-	} else if (document.getElementById("l6").checked == false && zValues.includes(z6fin) == true) {
+		if (zqaa1[k] >= slider1.value && zqaa1[k] <= slider2.value) {
+			zqaa2.push(zqaa1[k]);
 
-		layout.annotations = [];
-		var del1 = yValues.indexOf('Dataset B');
-		var del2 = zValues.indexOf(z6fin);
-		yValues.splice(del1, 1);
-		zValues.splice(del2, 1);
-		z6fin = [];
-		
 
-	}if (document.getElementById("l7").checked && zValues.includes(z7fin) == false) {
-
-		for (var i = 0; i < z7.length; i++) {
-
-			if (z7[i] >= slider1.value && z7[i] <= slider2.value) {
-				z7fin.push(z7[i]);
-
-			} else {
-				z7fin.push(null);
-			}
+		} else {
+			zqaa2.push(null);
 		}
+	}
 
-		layout.annotations = [];
-		yValues.push('Dataset C');
-		zValues.push(z7fin);
+	for (var l = 0; l < ztcc1.length; l++) {
 
-	} else if (document.getElementById("l7").checked == false && zValues.includes(z7fin) == true) {
+		if (ztcc1[l] >= slider1.value && ztcc1[l] <= slider2.value) {
+			ztcc2.push(ztcc1[l]);
 
-		layout.annotations = [];
-		var del1 = yValues.indexOf('Dataset C');
-		var del2 = zValues.indexOf(z7fin);
-		yValues.splice(del1, 1);
-		zValues.splice(del2, 1);
-		z7fin = [];
-		
+
+		} else {
+			ztcc2.push(null);
+		}
+	}
+
+	//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+	if (document.getElementById("om").checked) {
+
+		zA.splice(0, 1, zom2[0]);
+		zB.splice(0, 1, zom2[1]);
+		zC.splice(0, 1, zom2[2]);
+
+
+		xValues[0] = 'Omission as rate';
 
 	}
+	if (document.getElementById("om").checked == false) {
+
+		zA.splice(0, 1, null);
+		zB.splice(0, 1, null);
+		zC.splice(0, 1, null);
+
+	}
+
+	if (document.getElementById("com").checked) {
+
+		zA.splice(1, 1, zcom2[0]);
+		zB.splice(1, 1, zcom2[1]);
+		zC.splice(1, 1, zcom2[2]);
+
+
+		xValues[1] = 'QAA as R²';
+
+	}
+	if (document.getElementById("com").checked == false) {
+
+		zA.splice(1, 1, null);
+		zB.splice(1, 1, null);
+		zC.splice(1, 1, null);
+
+	}
+
+	if (document.getElementById("qaa").checked) {
+
+
+		zA.splice(2, 1, zqaa2[0]);
+		zB.splice(2, 1, zqaa2[1]);
+		zC.splice(2, 1, zqaa2[2]);
+
+		xValues[2] = 'QAA as RMSE';
+
+	}
+
+	if (document.getElementById("qaa").checked == false) {
+
+		zA.splice(2, 1, null);
+		zB.splice(2, 1, null);
+		zC.splice(2, 1, null);
+	}
+
+	if (document.getElementById("tcc").checked) {
+
+		zA.splice(3, 1, ztcc2[0]);
+		zB.splice(3, 1, ztcc2[1]);
+		zC.splice(3, 1, ztcc2[2]);
+
+		xValues[3] = 'Spatial Resolution';
+
+	}
+
+	if (document.getElementById("tcc").checked == false) {
+
+
+		zA.splice(3, 1, null);
+		zB.splice(3, 1, null);
+		zC.splice(3, 1, null);
+
+	}
+
+	//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+	if (document.getElementById("dA").checked && zValues.includes(zA) == false) {
+
+
+		zValues.push(zA);
+		yValues.push('GPW v4.0');
+
+	}
+	if (document.getElementById("dA").checked == false && zValues.includes(zA) == true) {
+
+		var del5 = yValues.indexOf('GPW v4.0');
+		yValues.splice(del5, 1);
+
+		var del6 = zValues.indexOf(zA);
+		zValues.splice(del6, 1);
+
+	}
+	if (document.getElementById("dB").checked && zValues.includes(zB) == false) {
+
+
+		zValues.push(zB);
+		yValues.push('WDPA v1.6');
+
+	}
+	if (document.getElementById("dB").checked == false && zValues.includes(zB) == true) {
+
+		var del7 = yValues.indexOf('WDPA v1.6');
+		yValues.splice(del7, 1);
+
+		var del2 = zValues.indexOf(zB);
+		zValues.splice(del2, 1);
+
+	}
+	if (document.getElementById("dC").checked && zValues.includes(zC) == false) {
+
+
+		zValues.push(zC);
+		yValues.push('GAEZ v3.0');
+
+	}
+	if (document.getElementById("dC").checked == false && zValues.includes(zC) == true) {
+
+		var del8 = yValues.indexOf('GAEZ v3.0');
+		yValues.splice(del8, 1);
+
+		var del9 = zValues.indexOf(zC);
+		zValues.splice(del9, 1);
+
+	}
+
+	if (document.getElementById("om").checked == false && document.getElementById("com").checked == false && document.getElementById("qaa").checked == false && document.getElementById("tcc").checked == false) {
+
+		xValues = [];
+		yValues = [];
+		zValues = [];
+
+	}
+
 
 	for (var i = 0; i < yValues.length; i++) {
 
@@ -445,9 +548,7 @@ display3.textContent = slider2.value-slider1.value;
 				showarrow: false,
 
 				font: {
-
 					color: 'black'
-
 				}
 
 			};
@@ -455,11 +556,17 @@ display3.textContent = slider2.value-slider1.value;
 			if (result.text != null) {
 				result.text = zValues[i][j];
 				layout.annotations.push(result);
-
 			}
 		}
 	}
+	colorinterpol();
 
-	Plotly.newPlot('myDiv', data, layout);
+	map.x = xValues;
+	map.y = yValues;
+	map.z = zValues;
+
+	data = [map];
+
+	Plotly.newPlot('myDiv', data, layout,{ displayModeBar: false });
 
 }

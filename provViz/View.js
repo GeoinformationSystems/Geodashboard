@@ -103,6 +103,7 @@ class View {
                     this.r * this.zoom_level,
                     meta[id].label,
                     meta[id].description,
+                    // meta[id].format,
                     meta[id].class
                 ));
             }

@@ -9,60 +9,63 @@
 
 </head>
 
-<body style="font-family: 'Open Sans'; font-size: 13px; width: 97%">
-	<div class="values">
-		<span id=range1> 0 </span> <span> - </span> <span id=range2>
-			100 </span>
-	</div>
-	<div class="wrapper">
+<body style="font-family: 'Open Sans'; font-size: 13px; width: 100%">
+	<div class="wrapper" style="width: 26em; height:10em; float:left;">
+		<div class="values">
+			<span id=range1> 0 </span> <span> - </span> <span id=range2>
+				100 </span>
+		</div>
 
-		<form>
-				<div class="slider-track" id="slider-track"></div>
-				<input type="range" id="range-a" min="0" max="100" value="0"
-					oninput="rangevalue1()"> <input type="range" id="range-b"
-					min="0" max="100" value="100" oninput="rangevalue2()">
-			
+
+		<form oninput="build()">
+			<div class="slider-track" id="slider-track"></div>
+			<input type="range" id="range-a" min="0" max="100" value="0"
+				oninput="range1()"> <input type="range" id="range-b" min="0"
+				max="100" value="100" oninput="range2()">
+
 		</form>
+
+
+		<div>
+			<input type="checkbox" id="dA" onclick="build()"> <label
+				for="dA">GPW v4.0</label> <input type="checkbox" id="dB"
+				onclick="build()"> <label for="dB">WDPA v1.6</label> <input
+				type="checkbox" id="dC" onclick="build()"> <label for="dC">GAEZ
+				v3.0</label>
+		</div>
+		<fieldset style="width: 22em">
+
+			<div>
+				<input type="checkbox" id="om" name="Quality Metric"
+					onclick="build()"> <label for="om"> Omission as
+					rate</label>
+			</div>
+			<div>
+				<input type="checkbox" id="com" name="Quality Metric"
+					onclick="build()"> <label for="com"> Quantitative
+					Attribute Accuracy as R²</label>
+			</div>
+			<div>
+				<input type="checkbox" id="qaa" name="Quality Metric"
+					onclick="build()"> <label for="qaa"> Quantitative
+					Attribute Accuracy as RMSE</label>
+			</div>
+			<div>
+				<input type="checkbox" id="tcc" name="Quality Metric"
+					onclick="build()"> <label for="tcc"> Spatial
+					Resolution</label>
+			</div>
+		</fieldset>
+
+		<a class="btn-hm btn-1" onclick="colorchange(this)">Color 1</a> <a
+			class="btn-hm btn-2" onclick="colorchange(this)">Color 2</a> <a
+			class="btn-hm btn-3" onclick="colorchange(this)">Color 3</a>
 	</div>
 
-	<div>
-		<input type="checkbox" id="l5" onclick="chooseD(this)"> <label
-			for="landsat5">GPW v4.0</label> <input type="checkbox" id="l6"
-			onclick="chooseD(this)"> <label for="landsat6">WDPA v1.6</label>
-		<input type="checkbox" id="l7" onclick="chooseD(this)"> <label
-			for="landsat7">GAEZ v3.0</label>
-	</div>
-	<fieldset>
-		<div>
-			<input type="checkbox" id="om" name="Quality Metric" value="Omission"
-				onclick="chooseQ(this)"> <label for="om"> Omission as rate</label>
-		</div>
-		<div>
-			<input type="checkbox" id="com" name="Quality Metric"
-				value="Commission" onclick="chooseQ(this)"> <label for="com">
-				Quantitative Attribute Accuracy as R²</label>
-		</div>
-		<div>
-			<input type="checkbox" id="qaa" name="Quality Metric"
-				value="Quantitative attribute accuracy" onclick="chooseQ(this)">
-			<label for="qaa">Quantitative Attribute Accuracy as RMSE</label>
-		</div>
-		<div>
-			<input type="checkbox" id="tcc" name="Quality Metric"
-				value="Thematic classification correctness" onclick="chooseQ(this)">
-			<label for="tcc">Spatial Resolution</label>
-		</div>
-	</fieldset>
-
-	<a class="btn-hm btn-1" onclick="colorchange(this)">Color 1</a>
-	<a class="btn-hm btn-2" onclick="colorchange(this)">Color 2</a>
-	<a class="btn-hm btn-3" onclick="colorchange(this)">Color 3</a>
-	<span id=show> Test </span>
-
-	<div id='myDiv'>
+	<div id='myDiv' style="float:left">
 		<!-- Plotly chart will be drawn inside this DIV -->
 	</div>
-	
+
 	<!--needs to be down here to access all elements in the js file-->
 	<script src='assets/js/HeatMap.js'></script>
 </body>

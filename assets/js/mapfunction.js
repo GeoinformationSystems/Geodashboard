@@ -1,156 +1,174 @@
+var legend = L.control({ position: 'bottomright' });
+var info = L.control();
+var mapdata = "";
+var germany_data =L.geoJson();
 function map1() {
-    // loading GeoJSON file - Here my html and usa_adm.geojson file resides in same folder
+	legend.remove(map);
+	info.remove(map);
+	germany_data.remove(map);
+	// loading GeoJSON file - Here my html and usa_adm.geojson file resides in same folder
 
-    var mapdata_1 = $.getJSON("assets/data/germany.geojson", function (data) {
-        function onEachFeature(feature, layer) {
-            var germany_data;
+	mapdata = $.getJSON("assets/data/germany.geojson", function(data) {
+		function onEachFeature(feature, layer) {
+			
 
-            layer.on({
-                mouseover: highlightFeature,
-                mouseout: resetHighlight
-            });
-        }
+			layer.on({
+				mouseover: highlightFeature,
+				mouseout: resetHighlight
+			});
+		}
 
-        // L.geoJson function is used to parse geojson file and load on to map
-        germany_data = L.geoJson(data, { style: style, onEachFeature: onEachFeature }).addTo(map);
-    });
+		// L.geoJson function is used to parse geojson file and load on to map
+		germany_data = L.geoJson(data, { style: style, onEachFeature: onEachFeature }).addTo(map);
+	});
 
-    var info = L.control();
+	
 
-    info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-        this.update();
-        return this._div;
-    };
+	info.onAdd = function(map) {
+		this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+		this.update();
+		return this._div;
+	};
 
-    // method that we will use to update the control based on feature properties passed
-    info.update = function (props) {
-        this._div.innerHTML = '<h4>Thematic classification correctness</h4>' + (props ?
-            '<b>' + props.NAME_1 + '</b><br />' + props.quality + ' %'
-            : 'Hover over polygon');
-    };
+	// method that we will use to update the control based on feature properties passed
+	info.update = function(props) {
+		this._div.innerHTML = '<h4>Thematic classification correctness</h4>' + (props ?
+			'<b>' + props.NAME_1 + '</b><br />' + props.quality + ' %'
+			: 'Hover over polygon');
+	};
 
-    info.addTo(map);
+	info.addTo(map);
 
-    var legend = L.control({ position: 'bottomright' });
 
-    legend.onAdd = function (map) {
 
-        var div = L.DomUtil.create('div', 'info legend'),
-            grades = [0, 70, 80, 85, 90, 94, 97],
-            labels = [];
+	legend.onAdd = function(map) {
 
-        // loop through our density intervals and generate a label with a colored square for each interval
-        for (var i = 0; i < grades.length; i++) {
-            div.innerHTML +=
-                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-        }
+		var div = L.DomUtil.create('div', 'info legend'),
+			grades = [0, 70, 80, 85, 90, 94, 97],
+			labels = [];
 
-        return div;
-    }; legend.addTo(map);
+		// loop through our density intervals and generate a label with a colored square for each interval
+		for (var i = 0; i < grades.length; i++) {
+			div.innerHTML +=
+				'<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+				grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+		}
+
+		return div;
+	};
+	
+
+	legend.addTo(map);
 }
 
 function map2() {
-    // loading GeoJSON file - Here my html and usa_adm.geojson file resides in same folder
-    var mapdata_2 = $.getJSON("assets/data/germany.geojson", function (data) {
-        function onEachFeature(feature, layer) {
-            var germany_data;
+	legend.remove(map);
+	info.remove(map);
+	germany_data.remove(map);
+	// loading GeoJSON file - Here my html and usa_adm.geojson file resides in same folder
+	mapdata = $.getJSON("assets/data/germany.geojson", function(data) {
+		function onEachFeature(feature, layer) {
+			
 
-            layer.on({
-                mouseover: highlightFeature,
-                mouseout: resetHighlight
-            });
-        }
+			layer.on({
+				mouseover: highlightFeature,
+				mouseout: resetHighlight
+			});
+		}
 
-        // L.geoJson function is used to parse geojson file and load on to map
-        germany_data = L.geoJson(data, { style: style2, onEachFeature: onEachFeature }).addTo(map);
-    });
+		// L.geoJson function is used to parse geojson file and load on to map
+		germany_data = L.geoJson(data, { style: style2, onEachFeature: onEachFeature }).addTo(map);
+	});
 
-    var info = L.control();
+	
 
-    info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-        this.update();
-        return this._div;
-    };
+	info.onAdd = function(map) {
+		this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+		this.update();
+		return this._div;
+	};
 
-    // method that we will use to update the control based on feature properties passed
-    info.update = function (props) {
-        this._div.innerHTML = '<h4>Quantitative attribute accuracy</h4>' + (props ?
-            '<b>' + props.NAME_1 + '</b><br />' + props.quality + ' %'
-            : 'Hover over polygon');
-    }; info.addTo(map);
+	// method that we will use to update the control based on feature properties passed
+	info.update = function(props) {
+		this._div.innerHTML = '<h4>Quantitative attribute accuracy</h4>' + (props ?
+			'<b>' + props.NAME_1 + '</b><br />' + props.quality + ' %'
+			: 'Hover over polygon');
+	}; info.addTo(map);
 
-    var legend = L.control({ position: 'bottomright' });
 
-    legend.onAdd = function (map) {
 
-        var div = L.DomUtil.create('div', 'info legend'),
-            grades = [0, 70, 80, 85, 90, 94, 97],
-            labels = [];
+	legend.onAdd = function(map) {
 
-        // loop through our density intervals and generate a label with a colored square for each interval
-        for (var i = 0; i < grades.length; i++) {
-            div.innerHTML +=
-                '<i style="background:' + getColor2(grades[i] + 1) + '"></i> ' +
-                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-        }
+		var div = L.DomUtil.create('div', 'info legend'),
+			grades = [0, 70, 80, 85, 90, 94, 97],
+			labels = [];
 
-        return div;
-    };legend.addTo(map);
+		// loop through our density intervals and generate a label with a colored square for each interval
+		for (var i = 0; i < grades.length; i++) {
+			div.innerHTML +=
+				'<i style="background:' + getColor2(grades[i] + 1) + '"></i> ' +
+				grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+		}
+
+
+
+		return div;
+	}; legend.addTo(map);
 }
 
 function map3() {
-    // loading GeoJSON file - Here my html and usa_adm.geojson file resides in same folder
-    var mapdata_3 = $.getJSON("assets/data/asia.geojson", function (data) {
-        function onEachFeature(feature, layer) {
-            var germany_data;
+	legend.remove(map);
+	info.remove(map);
+	germany_data.remove(map);
+	// loading GeoJSON file - Here my html and usa_adm.geojson file resides in same folder
+	mapdata = $.getJSON("assets/data/asia.geojson", function(data) {
+		function onEachFeature(feature, layer) {
+			
 
-            layer.on({
-                mouseover: highlightFeature,
-                mouseout: resetHighlight
-            });
-        }
+			layer.on({
+				mouseover: highlightFeature,
+				mouseout: resetHighlight
+			});
+		}
 
-        // L.geoJson function is used to parse geojson file and load on to map
-        germany_data = L.geoJson(data, { style: style, onEachFeature: onEachFeature }).addTo(map);
-    });
+		// L.geoJson function is used to parse geojson file and load on to map
+		germany_data = L.geoJson(data, { style: style, onEachFeature: onEachFeature }).addTo(map);
+	});
 
-    var info = L.control();
+	
 
-    info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-        this.update();
-        return this._div;
-    };
+	info.onAdd = function(map) {
+		this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+		this.update();
+		return this._div;
+	};
 
-    // method that we will use to update the control based on feature properties passed
-    /*info.update = function (props) {
-        this._div.innerHTML = '<h4>Thematic classification correctness</h4>' + (props ?
-            '<b>' + props.NAME_1 + '</b><br />' + props.quality + ' %'
-            : 'Hover over polygon');
-    };
+	// method that we will use to update the control based on feature properties passed
+	/*info.update = function (props) {
+		this._div.innerHTML = '<h4>Thematic classification correctness</h4>' + (props ?
+			'<b>' + props.NAME_1 + '</b><br />' + props.quality + ' %'
+			: 'Hover over polygon');
+	};
 
-    info.addTo(map);*/
+	info.addTo(map);*/
 
-    var legend = L.control({ position: 'bottomright' });
 
-    legend.onAdd = function (map) {
 
-        var div = L.DomUtil.create('div', 'info legend'),
-            grades = [0, 70, 80, 85, 90, 94, 97],
-            labels = [];
+	legend.onAdd = function(map) {
 
-        // loop through our density intervals and generate a label with a colored square for each interval
-        for (var i = 0; i < grades.length; i++) {
-            div.innerHTML +=
-                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-        }
+		var div = L.DomUtil.create('div', 'info legend'),
+			grades = [0, 70, 80, 85, 90, 94, 97],
+			labels = [];
 
-        return div;
-    };
+		// loop through our density intervals and generate a label with a colored square for each interval
+		for (var i = 0; i < grades.length; i++) {
+			div.innerHTML +=
+				'<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+				grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+		}
+
+		return div;
+	}; legend.addTo(map);
 }
 
 function getColor(d) {

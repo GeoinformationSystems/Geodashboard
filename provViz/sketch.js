@@ -62,6 +62,9 @@ function doubleClicked() {
   }
 }
 
+
+
+
 keyPressed = function () {
   // strg pressed
   if (keyCode === 17) {
@@ -71,6 +74,7 @@ keyPressed = function () {
 keyReleased = function () {
   strg_pressed = false;
 }
+
 
 function mousePressed() {
   hover = false;
@@ -124,6 +128,32 @@ function mousePressed() {
   }
 }
 
+
+function mouseClicked() {
+  
+   hover = false;
+  if (mouseButton === LEFT) {
+    clicked_node = false;
+    for (let p5node of view.get_nodes()) {
+      if (p5node.left_selected()) clicked_node = true;
+      hover = true;
+    }
+   
+    left_clicked_x = mouseX;
+    left_clicked_y = mouseY;
+    for (let p5node of view.get_nodes()) {
+      coords_old[p5node.get_id()] = {
+        'x': p5node.get_x(),
+        'y': p5node.get_y()
+      }
+    }
+
+  }
+  }
+
+
+
+
 function mouseReleased() {
   // stop dragging
   hover = true;
@@ -142,6 +172,8 @@ function mouseDragged() {
   }
 }
 
+
+
 function mouseWheel(event) {
   // zoom in or out
   if (event.delta < 0) {
@@ -151,6 +183,8 @@ function mouseWheel(event) {
     view.zoom_out()
   }
 }
+
+
 
 function enable_hover() {
   for (let p5node of view.get_nodes()) {

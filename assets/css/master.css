@@ -32,7 +32,7 @@ td {
 }
 
 body {
-    width: 70%;
+    /*width: 70%;*/
     height: 100%;
     background: #f4f6fa;
     font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
@@ -228,7 +228,7 @@ body {
 }
 
 #myTab {
-    margin-bottom: 15px;
+    /*margin-bottom: 15px;*/
 }
 
 .no-margin {

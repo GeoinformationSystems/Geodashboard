@@ -15,7 +15,6 @@ class Model {
         this.endpoint = endpoint
     }
 
-
     async sparql(query) {
         const url = this.endpoint +
             '?query=' + encodeURIComponent(query) +
@@ -58,12 +57,29 @@ class Model {
         return node_description;
     }
 
+    // async get_node_format(node) {
+    //     let select = [
+    //         'SELECT ?format WHERE {',
+    //         'OPTIONAL {<' + node + '> dct:format ?format. }',
+    //         '}'
+    //     ]
+    //     select = this.prefixes.concat(select).join(' ');
+    //     const response = await this.sparql(select)
+    //     let node_format = null
+    //     for (let binding of response.results.bindings) {
+    //         if (binding.format) node_format = binding.format.value
+    //     }
+
+    //     return node_format;
+    // }
+
     async get_node_class(node) {
         let select = [
             'SELECT ?class WHERE {',
             'OPTIONAL {<' + node + '> a ?class. }',
             '}'
         ]
+        
         select = this.prefixes.concat(select).join(' ');
         const response = await this.sparql(select)
         let node_class = []
@@ -87,6 +103,7 @@ class Model {
             json.id = binding.newNode.value
             json.label = await this.get_node_label(json.id)
             json.description = await this.get_node_description(json.id)
+            // json.format = await this.get_node_format(json.id)
             json.class = await this.get_node_class(json.id)
             nodes.push(json)
         }
@@ -107,6 +124,7 @@ class Model {
             json.id = binding.newNode.value
             json.label = await this.get_node_label(json.id)
             json.description = await this.get_node_description(json.id)
+            // json.format = await this.get_node_format(json.id)
             json.class = await this.get_node_class(json.id)
             nodes.push(json)
         }
@@ -126,6 +144,7 @@ class Model {
             'id': node_id,
             'label': node_label,
             'description': await this.get_node_description(node_id),
+            // 'format': await this.get_node_format(node_id),
             'class': await this.get_node_class(node_id)
         }
 
@@ -140,6 +159,7 @@ class Model {
             if (!parent_label) parent_label = parent.id
             reference[parent.id].label = parent_label;
             reference[parent.id].description = parent.description;
+            // reference[parent.id].format = parent.format;
             reference[parent.id].class = parent.class;
             expanded_nodes_ids.push(parent.id)
         }
@@ -151,6 +171,7 @@ class Model {
             if (!child_label) child_label = child.id
             reference[child.id].label = child_label;
             reference[child.id].description = child.description;
+            // reference[parent.id].format = parent.format;
             reference[child.id].class = child.class;
             expanded_nodes_ids.push(child.id)
         }
@@ -170,12 +191,15 @@ class Model {
             'id': node_id,
             'label': node_label,
             'description': await this.get_node_description(node_id),
+            // 'format': await this.get_node_format(node_id),
             'class': await this.get_node_class(node_id)
         }
         this.add_data(reference, []);
         this.calc_layout();
 
     }
+
+    
 
     add_data(reference, edges) {
         for (let key of Object.keys(reference)) {
@@ -207,7 +231,7 @@ class Model {
         }
 
         dagre.layout(dagre_graph)
-
+    
 
         let max_x = 0;
         let max_y = 0;

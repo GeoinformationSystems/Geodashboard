@@ -1,150 +1,167 @@
 <!doctype html>
+
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Geodashboard</title>
-    <link href="assets/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
-    <link href="assets/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
-    <link href="assets/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/master.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
-    <link href="assets/css/HeatMap.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Geodashboard</title>
+<link href="assets/vendor/fontawesome/css/fontawesome.min.css"
+	rel="stylesheet">
+<link href="assets/vendor/fontawesome/css/solid.min.css"
+	rel="stylesheet">
+<link href="assets/vendor/fontawesome/css/brands.min.css"
+	rel="stylesheet">
+<link href="assets/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="assets/css/master.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+<link href="assets/css/HeatMap.css" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300"
+	rel="stylesheet" type="text/css">
 
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/script.js"></script>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="http://d3js.org/d3.v2.min.js?2.9.3"></script>
-    <script src="assets/js/mapfunction.js"></script>
-    <script src="assets/js/HeatMap.js"></script>
+<script src="assets/vendor/jquery/jquery.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/script.js"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="http://d3js.org/d3.v2.min.js?2.9.3"></script>
+<script src="assets/js/mapfunction.js"></script>
+<script src="assets/js/HeatMap.js"></script>
 </head>
 
 <body>
-    <div class="wrapper" style="height: 79em">
-        <div id="body" class="active">
-            <!-- start header -->
-            <nav id="navbar" class="navbar navbar-expand-lg">
-                <img src="assets/img/geokur_green.png" alt="bootraper logo" class="app-logo" width="300em">
-                <h4 id="dash-title">Geodashboard-Prototype</h4>
-            </nav>
-            <!-- end header -->
+	<div class="wrapper" style="height: 56em">
+		<div id="body" class="active">
+			<!-- start header -->
+			<nav id="navbar" class="navbar navbar-expand-lg">
+				<img src="assets/img/geokur_green.png" alt="bootraper logo"
+					class="app-logo" width="300em">
+				<h4 id="dash-title">Geodashboard-Prototype</h4>
+				<!-- <div class="content" id="button-box">
+					<button type="button" class="btn btn-secondary mb-2" id="data1">GPW
+						v4.0</button>
+					<button type="button" class="btn btn-secondary mb-2" id="data2">WDPA
+						v1.6</button>
+					<button type="button" class="btn btn-secondary mb-2" id="data3">GAEZ
+						v3.0</button>
+				</div> -->
+			</nav>
 
-            <div class="content">
-                <div class="row">
+			<!-- end header -->
 
-                    <!-- Window Provenance-Graph -->
-                    <div class="col-md-6" id="provenance_pane">
-                        <div class="card-header">Provenance Graph</div>
-                        <div class="card">
-                            <div class="content" style="height: 30em">
-                                <embed type="text/html" src="provViz/index.html" style="width: 100%; height: 27em;">
-                            </div>
-                        </div>
-                    </div>
+			<div class="content">
+				<div class="row">
 
-                    <!-- Window General Metadata -->
-                    <div class="col-md-6" id="tabelle_pane">
-                        <div class="card-header">General Metadata</div>
-                        <div class="card">
-                            <div class="content" style="height: 30em">
-                                <table id="data_input" class="table table-striped" text-align="left"> <tbody style="font-size: small; text-align: left;"> <tr> <td></i>Dataset-Name</td> <td class="text-end">Harvested Area and Yield for 175 Crops</td> </tr> <tr> <td></i>Documentation</td> <td class="text-end"><a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2007GB002947">https://agupubs.onlinelibrary.wiley.com/doi/full/<br>10.1029/2007GB002947</a> </td> </tr> <tr> <td></i>Contact Point</td> <td class="text-end">Chad Monfreda, Navin Ramankutty, Earthstat</td> </tr> <tr> <td></i>Information-Website</td> <td class="text-end"><a href="http://www.earthstat.org/harvested-area-yield-175-crops/">http://www.earthstat.org/harvested-area-yield-175-crops/</a> </td> </tr> <td></i>EPSG</td> <td class="text-end"><a href="	http://www.opengis.net/def/crs/EPSG/0/4326">http://www.opengis.net/def/crs/EPSG/0/4326</a> </td> </tr> <tr> <td></i>Spatial Res.</td> <td class="text-end">0.083333</td> </tr> <tr> <td></i>Spatial Res. Measured</td> <td class="text-end">As angluar distance</td> </tr> <tr> <td></i>Temporal Coverage</td> <td class="text-end">1997-01-01 to 2003-12-31</td> </tr> <tr> <td></i>Was derived from</td> <td class="text-end">Cropland and Pasture Area in 2000<br>Agricultural Inventory Data</td> </tr> <tr> <td></i>Created</td> <td class="text-end">August 25, 2021, 1:25 PM (UTC+02:00)</td> </tr> <tr> <td></i>Last Updated</td> <td class="text-end">December 8, 2021, 11:38 AM (UTC+01:00)</td> </tr> <tr> <td></i>Definition</td> <td class="text-end">Croplands cover ~15 million km2 of the planet and provide the bulk of the food and fiber essential to human well-being. Most global land cover data sets from satellites group croplands into just a few categories, thereby excluding information that is critical for answering key questions ranging from biodiversity conservation to food security to biogeochemical cycling. Information about agricultural land use practices like crop selection, yield, and fertilizer use is even more limited. Here we present land use data sets created by combining national, state, and county level census statistics with a recently updated global data set of croplands on a 5 minute by 5 minute (~10 km by 10 km) latitude/longitude grid. The resulting land use datasets depict circa the year 2000 the area (harvested) and yield of 175 distinct crops of the world. </td> </tr> </tbody> </table>
-                            </div>
-                        </div>
-                    </div>
+					<!-- Window Provenance-Graph -->
+					<div class="col-md-6" id="provenance_pane">
+						<div class="card-header">Provenance Graph</div>
+						<div class="card" >
+							<div class="content" style="height: 23em">
+								<embed type="text/html" src="provViz/index.html"
+									style="width: 100%; height: 21em;">
+							</div>
+						</div>
+					</div>
 
-                    <!-- Window Quality Charts -->
-                    <div class="col-md-6" id="quality_pane">
-                        <div class="card" style="height: 39em">
-                            <div class="card-header">Quality information</div>
-                            <div class="card-body">
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="contact-tab" data-bs-toggle="tab" href="#tab1"
-                                            role="tab" aria-controls="contact" aria-selected="false">Matrix View</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
-                                            aria-controls="home" aria-selected="false">Error Chart</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile"
-                                            role="tab" aria-controls="profile" aria-selected="false">Simple Graph</a>
-                                    </li>
-                                    <li class="nav-item">
+					<!-- Window General Metadata -->
+					<div class="col-md-6" id="tabelle_pane">
+						<div class="card-header">General Metadata</div>
+						<div class="card">
+							<div class="content" style="height: 23em">
+								<embed type="text/html" src="metadata.html" style="width: 100%; height: 21em;" >
+							</div>
+						</div>
+					</div>
+
+					<!-- Window Quality Charts -->
+					<div class="col-md-6" id="quality_pane">
+						<div class="card" style="height: 24em">
+
+							<div class="card-header">Quality information</div>
+
+							<div class="card-body">
+
+								<ul class="nav nav-tabs" id="myTab" role="tablist"
+									style="height: 2.8em">
+									<li class="nav-item"><a class="nav-link active"
+										id="contact-tab" data-bs-toggle="tab" href="#tab1" role="tab"
+										aria-controls="contact" aria-selected="false">Matrix View</a>
+									</li>
+									<li class="nav-item"><a class="nav-link" id="home-tab"
+										data-bs-toggle="tab" href="#home" role="tab"
+										aria-controls="home" aria-selected="false">Error Chart</a></li>
+									<li class="nav-item"><a class="nav-link" id="profile-tab"
+										data-bs-toggle="tab" href="#profile" role="tab"
+										aria-controls="profile" aria-selected="false">Simple Graph</a>
+									</li>
+									<!-- <li class="nav-item">
                                         <a class="nav-link" id="qualitymap-tab" data-bs-toggle="tab" href="#qualitymap"
                                             role="tab" aria-controls="profile" aria-selected="false">Data Quality
                                             Map</a>
-                                    </li>
+                                    </li> -->
 
-                                </ul>
-                                <div class="content" id="button-box">
-                                    <button type="button" class="btn btn-secondary mb-2" id="data1">GPW v4.0</button>
-                                    <button type="button" class="btn btn-secondary mb-2" id="data2">WDPA v1.6</button>
-                                    <button type="button" class="btn btn-secondary mb-2" id="data3">GAEZ v3.0</button>
-                                    <button type="button" class="btn btn-secondary mb-2" id="data4">Testing</button>
-                                </div>
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade active show" id="tab1" role="tabpanel"
-                                        aria-labelledby="contact-tab">
+								</ul>
 
-                                        <!-- Heat Chart-->
-                                        <div class="card">
-                                            <div class="content" style="height: 27em">
-                                             <embed type="text/html" src="chart_qm.html"
-                                                    style="width:100%; height:27em;">
-                                                     
 
-                                            </div>
-                                        </div>
-                                    </div>
+								<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade active show" id="tab1"
+										role="tabpanel" aria-labelledby="contact-tab">
 
-                                    <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+										<!-- Heat Chart-->
+										<div class="card">
+											<div class="content" style="height: 15em; overflow: hidden">
+												<embed type="text/html" src="chart_qm.html"
+													style="width: 100%; height: 15em;">
+											</div>
+										</div>
+									</div>
 
-                                        <!-- Error Chart -->
-                                        <div class="card">
-                                            <div class="content" style="height: 27em">
-                                                <embed type="text/html" src="chart_ec.html"
-                                                    style="width:100%; height:27em;">
+									<div class="tab-pane fade" id="home" role="tabpanel"
+										aria-labelledby="home-tab">
 
-                                            </div>
-                                        </div>
-                                    </div>
+										<!-- Error Chart -->
+										<div class="card">
+											<div class="content" style="height: 15em; overflow: hidden">
+												<embed type="text/html" src="chart_ec.html"
+													style="width: 100%; height: 15em;">
+											</div>
+										</div>
+									</div>
 
-                                    <div class="tab-pane fade" id="profile" role="tabpanel"
-                                        aria-labelledby="profile-tab">
+									<div class="tab-pane fade" id="profile" role="tabpanel"
+										aria-labelledby="profile-tab">
 
-                                        <!-- Simple Graph -->
-                                        <div class="card">
-                                            <div class="content" style="height: 27em">
-                                                <embed type="text/html" src="chart_sg.html"
-                                                    style="width:100%; height:27em;">
-                                            </div>
-                                        </div>
-                                    </div>
+										<!-- Simple Graph -->
+										<div class="card">
+											<div class="content" style="height: 15em; overflow: hidden">
+												<embed type="text/html" src="chart_sg.html"
+													style="width: 100%; height: 15em;">
+											</div>
+										</div>
+									</div>
 
-                                    <div class="tab-pane fade" id="qualitymap" role="tabpanel"
-                                        aria-labelledby="qualitymap-tab">
+									<div class="tab-pane fade" id="qualitymap" role="tabpanel"
+										aria-labelledby="qualitymap-tab">
 
-                                        <!-- Quality Map -->
-                                        <div class="card">
-                                            <div class="content" style="height: 27em">
-                                                <div id="map2"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+										<!-- Quality Map -->
+										<div class="card">
+											<div class="content" style="height: 27em">
+												<div id="map2"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-                    <!-- Map-Window -->
+				   <!-- Map-Window -->
                     <div class="col-md-6" id="map_pane">
-                        <div class="card" style="height: 39em">
+                        <div class="card" style="height: 24em">
                             <div class="card-header">Preview and dataset</div>
                             <div class="card-body">
 
@@ -165,9 +182,9 @@
 
                                     <div class="tab-pane fade active show" id="seq_tab1" role="tabpanel"
                                         aria-labelledby="seq-map-tab">
-                                        <div class="card">
-                                            <div class="content" style="height: 30em">
-                                                <div id="map"></div>
+                                        <div class="card" >
+                                            <div class="content" style="height:15.25em; overflow: hidden">
+                                                <div id="map" style="height: 18em"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -175,101 +192,127 @@
                                     <div class="tab-pane fade" id="seq_data" role="tabpanel"
                                         aria-labelledby="seq-data-tab">
                                         <div class="card">
-                                            <div class="content" style="height: 28em">
-                                                <embed type="text/html" src="map_table.html" style="height:26em;">
+                                            <div class="content"style=" height:15.25em; overflow: hidden" >
+                                                <embed type="text/html" src="map_table.html" style="width: 100%;height: 13.25em">
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <script>
-        // Properties Map
-        var map = L.map('map').setView([51.450891, 10.636343], 6);
-        mapLink =
-            '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-        L.tileLayer(
-            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; ' + mapLink + ' Contributors',
-            maxZoom: 18,
-        }).addTo(map);
-        
-    </script>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
 
+	<script>
+		// Properties Map
+		var map = L.map('map').setView([ 51.5, 10], 4);
+		mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+		L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution : '&copy; ' + mapLink + ' Contributors',
+			maxZoom : 18,
+		}).addTo(map);
+		var bounds = [ [ 47.3, 6 ], [ 55, 15.01 ] ];
+		rect1 = L.rectangle(bounds, {
+				color : "#ff7800",
+				weight : 1
+			}).addTo(map);
+		map.setMaxBounds(map.getBounds());
+	</script>
 
-    <script>
-        const dataset1 = ["MapSPAM", "High-Resolution Global Maps of 21st-Century Forest Cover Change", "M.C. Hansen", "http://earthenginepartners.appspot.com", "INSPIRE Landcover + <br> + INSPIRE Landuse", "EPSG:4326", "1 arcsec", "2000-2019", "Global Forest Change 2000–2018 v1.6", "Landsat 5 + <br> + Landsat 7 ETM+", "P1Y", "May 26, 2021, 11:46 AM (UTC+01:00)"];
+<!-- 
+	<script>
+		const dataset1 = [
+				"MapSPAM",
+				"High-Resolution Global Maps of 21st-Century Forest Cover Change",
+				"M.C. Hansen", "http://earthenginepartners.appspot.com",
+				"INSPIRE Landcover + <br> + INSPIRE Landuse", "EPSG:4326",
+				"1 arcsec", "2000-2019", "Global Forest Change 2000–2018 v1.6",
+				"Landsat 5 + <br> + Landsat 7 ETM+", "P1Y",
+				"May 26, 2021, 11:46 AM (UTC+01:00)" ];
 
-        // Klick-Event für Button "data1"
-        document.getElementById("data1").onclick = function () {
-            map1();
-            map.removeLayer(mapdata_2);
-            map.removeLayer(mapdata_3);
-        }
+		// Klick-Event für Button "data1"
+		document.getElementById("data1").onclick = function() {
 
-        // Klick-Event für Button "data2"
-        document.getElementById("data2").onclick = function () {
-            map2();
-            map.removeLayer(mapdata_1);
-            map.removeLayer(mapdata_3);
-        }
+			map1();
+			map.removeLayer(mapdata);
 
-        // Klick-Event für Button "data3"
-        document.getElementById("data3").onclick = function () {
-            map3();
-            map.removeLayer(mapdata_1);
-            map.removeLayer(mapdata_2);
-        }
+		}
 
-        // Hovering Button "data1"
-        document.getElementById("data1").onmouseover = function () {
-            var bounds = [[0, -90], [360, 90]];
-            rect1 = L.rectangle(bounds, { color: "#ff7800", weight: 1 }).addTo(map);
-            map.fitBounds(bounds);
-            //map.removeLayer(rect2)
-            $(data_input).html('<tbody style="font-size: small;"><tr><td></i>Name</td><td class="text-end">GPW Gridded Population of the World v4.0</td></tr><tr><td></i>Documentation</td><td class="text-end">https://sedac.ciesin.columbia.edu/binaries/web/sedac/<br>collections/gpw-v4/gpw-v4-documentation-rev11.pdf</td></tr><tr><td></i>Contact Point</td><td class="text-end">	Center for International Earth Science Information Network - CIESIN - Columbia University</td></tr><tr><td></i>Website</td><td class="text-end"><a href="https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-density-adjusted-to-2015-unwpp-country-totals-rev11</a></td></tr><tr><td></i>Theme</td><td class="text-end">	https://inspire.ec.europa.eu/theme/pd</td></tr><tr><td></i>Coordinate Reference System</td><td class="text-end">EPSG:4326</td></tr><tr><td></i>Spatial Resolution</td><td class="text-end">0.008333</td></tr><tr><td></i>Temporal Extent</td><td class="text-end">2000-01-01 to 2020-01-01</td></tr><tr><td></i>Parent Dataset</td><td class="text-end">Global Forest Change 2000–2018 v1.6</td></tr><tr><td></i>Derived from</td><td class="text-end">Landsat 5<br>Landsat 7 ETM+<br>Landsat 8 OLI</td></tr><tr><td></i>Temporal Resolution</td><td class="text-end">P1Y</td></tr><tr><td></i>Created</td><td class="text-end">April 30, 2021, 4:24 PM (UTC+02:00)</td></tr></tbody>');
-        }
+		// Klick-Event für Button "data2"
+		document.getElementById("data2").onclick = function() {
 
-        // Hovering Button "data2"
-        document.getElementById("data2").onmouseover = function () {
-            var bounds = [[47.3, 6], [55, 15.01]];
-            rect2 = L.rectangle(bounds, { color: "#ff7800", weight: 1 }).addTo(map);
-            map.fitBounds(bounds);
-            //map.removeLayer(rect1)
-            $(data_input).html('<tbody style="font-size: small;"><tr><td></i>Name</td><td class="text-end">WDPA World Database on Protected Areas v1.6</td></tr><tr><td></i>Documentation</td><td class="text-end">	https://wdpa.s3-eu-west-1.amazonaws.com/WDPA_Manual/<br>English/WDPA_WDOECM_Manual_1_6.pdf</td></tr><tr><td></i>Contact Point</td><td class="text-end">	protectedareas@unep-wcmc.org</td></tr><tr><td></i>Website</td><td class="text-end"><a href="https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA">https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA</a></td></tr><tr><td></i>Theme</td><td class="text-end">https://inspire.ec.europa.eu/theme/ps<br>https://agrovoc.fao.org/browse/agrovoc/en/page/c_37952</td></tr><tr><td></i>Coordinate Reference System</td><td class="text-end">	http://www.opengis.net/def/datum/EPSG/0/6326</td></tr><tr><td></i>Spatial Resolution</td><td class="text-end">-</td></tr><tr><td></i>Temporal Extent</td><td class="text-end">	1819-01-01 to 2021-04-30</td></tr><tr><td></i>Parent Dataset</td><td class="text-end">Global Forest Change 2000–2018 v1.6</td></tr><tr><td></i>Temporal Resolution</td><td class="text-end">P1M</td></tr><tr><td></i>Created</td><td class="text-end">March 12, 2018, 12:18 AM (UTC+01:00)<br></td></tr></tbody>');
-        }
+			map2();
+			map.removeLayer(mapdata);
+		}
 
-        // Hovering Button "data3"
-        document.getElementById("data3").onmouseover = function () {
-            var bounds = [[-10.3, 26.04], [55.4, 145.5]];
-            rect3 = L.rectangle(bounds, { color: "#ff7800", weight: 1 }).addTo(map);
-            map.fitBounds(bounds);
-            //map.removeLayer(rect1)
-            $(data_input).html('<tbody style="font-size: small;"><tr><td></i>Name</td><td class="text-end">GAEZ Global Agro-ecological Zones v3.0</td></tr><tr><td></i>Documentation</td><td class="text-end">https://webarchive.iiasa.ac.at/Research/LUC/<br>GAEZv3.0/docs/GAEZ_Model_Documentation.pdf</td></tr><tr><td></i>Contact Point</td><td class="text-end">Food and Agriculture Organization of the United Nations (FAO)</td></tr><tr><td></i>Website</td><td class="text-end"><a href="https://webarchive.iiasa.ac.at/Research/LUC/GAEZv3.0">https://webarchive.iiasa.ac.at/Research/LUC/GAEZv3.0</a></td></tr><tr><td></i>Theme</td><td class="text-end">http://inspire.ec.europa.eu/theme/af</td></tr><tr><td></i>Coordinate Reference System</td><td class="text-end">http://www.opengis.net/def/crs/EPSG/0/4326</td></tr><tr><td></i>Spatial Resolution</td><td class="text-end">0.08333</td></tr><tr><td></i>Temporal Extent</td><td class="text-end">1961-01-01 to 2000-01-01</td></tr><tr><td></i>Parent Dataset</td><td class="text-end">Harvested Area and Yield for 175 Crops</td></tr><tr><td></i>Temporal Resolution</td><td class="text-end">P1M</td></tr><tr><td></i>Created</td><td class="text-end">February 29, 2022, 11:46 AM (UTC+01:00)<br></td></tr><tr><td></i>Definition</td><td class="text-end">GAEZ v 3.0 incorporates two important new global data sets on “Actual Yield and Production’ and “Yield and Production Gaps” between potentials and actual yield and production. Geo‐referenced global climate, soil and terrain data are combined into a land resources database, commonly assembled on the basis of global grids, typically at 5 arc‐minute and 30 arc‐second resolutions. Climatic data comprises precipitation, temperature, wind speed, sunshine hours and relative humidity, which are used to compile agronomically meaningful climate resources inventories including quantified thermal and moisture regimes in space and time.</td></tr></tbody>');
-        }
+		// Klick-Event für Button "data3"
+		document.getElementById("data3").onclick = function() {
 
-        // dehovering Button "data1"
-        document.getElementById("data1").onmouseout = function () {
-            map.removeLayer(rect1);
-        }
+			map3();
+			map.removeLayer(mapdata);
+		}
 
-        // dehovering Button "data2"
-        document.getElementById("data2").onmouseout = function () {
-            map.removeLayer(rect2);
-        }
+		// Hovering Button "data1"
+		document.getElementById("data1").onmouseover = function() {
+			var bounds = [ [ 0, -90 ], [ 360, 90 ] ];
+			rect1 = L.rectangle(bounds, {
+				color : "#ff7800",
+				weight : 1
+			}).addTo(map);
+			map.fitBounds(bounds);
+			//map.removeLayer(rect2)
+			$(data_input)
+					.html(
+							'<tbody style="font-size: small;"><tr><td></i>Name</td><td class="text-end">GPW Gridded Population of the World v4.0</td></tr><tr><td></i>Documentation</td><td class="text-end">https://sedac.ciesin.columbia.edu/binaries/web/sedac/<br>collections/gpw-v4/gpw-v4-documentation-rev11.pdf</td></tr><tr><td></i>Contact Point</td><td class="text-end">	Center for International Earth Science Information Network - CIESIN - Columbia University</td></tr><tr><td></i>Website</td><td class="text-end"><a href="https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-density-adjusted-to-2015-unwpp-country-totals-rev11</a></td></tr><tr><td></i>Theme</td><td class="text-end">	https://inspire.ec.europa.eu/theme/pd</td></tr><tr><td></i>Coordinate Reference System</td><td class="text-end">EPSG:4326</td></tr><tr><td></i>Spatial Resolution</td><td class="text-end">0.008333</td></tr><tr><td></i>Temporal Extent</td><td class="text-end">2000-01-01 to 2020-01-01</td></tr><tr><td></i>Parent Dataset</td><td class="text-end">Global Forest Change 2000–2018 v1.6</td></tr><tr><td></i>Derived from</td><td class="text-end">Landsat 5<br>Landsat 7 ETM+<br>Landsat 8 OLI</td></tr><tr><td></i>Temporal Resolution</td><td class="text-end">P1Y</td></tr><tr><td></i>Created</td><td class="text-end">April 30, 2021, 4:24 PM (UTC+02:00)</td></tr></tbody>');
+		}
 
-        // dehovering Button "data3"
-        document.getElementById("data3").onmouseout = function () {
-            map.removeLayer(rect3);
-        }
+		// Hovering Button "data2"
+		document.getElementById("data2").onmouseover = function() {
+			var bounds = [ [ 47.3, 6 ], [ 55, 15.01 ] ];
+			rect2 = L.rectangle(bounds, {
+				color : "#ff7800",
+				weight : 1
+			}).addTo(map);
+			map.fitBounds(bounds);
+			//map.removeLayer(rect1)
+			$(data_input)
+					.html(
+							'<tbody style="font-size: small;"><tr><td></i>Name</td><td class="text-end">WDPA World Database on Protected Areas v1.6</td></tr><tr><td></i>Documentation</td><td class="text-end">	https://wdpa.s3-eu-west-1.amazonaws.com/WDPA_Manual/<br>English/WDPA_WDOECM_Manual_1_6.pdf</td></tr><tr><td></i>Contact Point</td><td class="text-end">	protectedareas@unep-wcmc.org</td></tr><tr><td></i>Website</td><td class="text-end"><a href="https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA">https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA</a></td></tr><tr><td></i>Theme</td><td class="text-end">https://inspire.ec.europa.eu/theme/ps<br>https://agrovoc.fao.org/browse/agrovoc/en/page/c_37952</td></tr><tr><td></i>Coordinate Reference System</td><td class="text-end">	http://www.opengis.net/def/datum/EPSG/0/6326</td></tr><tr><td></i>Spatial Resolution</td><td class="text-end">-</td></tr><tr><td></i>Temporal Extent</td><td class="text-end">	1819-01-01 to 2021-04-30</td></tr><tr><td></i>Parent Dataset</td><td class="text-end">Global Forest Change 2000–2018 v1.6</td></tr><tr><td></i>Temporal Resolution</td><td class="text-end">P1M</td></tr><tr><td></i>Created</td><td class="text-end">March 12, 2018, 12:18 AM (UTC+01:00)<br></td></tr></tbody>');
+		}
 
-    </script>
+		// Hovering Button "data3"
+		document.getElementById("data3").onmouseover = function() {
+			var bounds = [ [ -10.3, 26.04 ], [ 55.4, 145.5 ] ];
+			rect3 = L.rectangle(bounds, {
+				color : "#ff7800",
+				weight : 1
+			}).addTo(map);
+			map.fitBounds(bounds);
+			//map.removeLayer(rect1)
+			$(data_input)
+					.html(
+							'<tbody style="font-size: small;"><tr><td></i>Name</td><td class="text-end">GAEZ Global Agro-ecological Zones v3.0</td></tr><tr><td></i>Documentation</td><td class="text-end">https://webarchive.iiasa.ac.at/Research/LUC/<br>GAEZv3.0/docs/GAEZ_Model_Documentation.pdf</td></tr><tr><td></i>Contact Point</td><td class="text-end">Food and Agriculture Organization of the United Nations (FAO)</td></tr><tr><td></i>Website</td><td class="text-end"><a href="https://webarchive.iiasa.ac.at/Research/LUC/GAEZv3.0">https://webarchive.iiasa.ac.at/Research/LUC/GAEZv3.0</a></td></tr><tr><td></i>Theme</td><td class="text-end">http://inspire.ec.europa.eu/theme/af</td></tr><tr><td></i>Coordinate Reference System</td><td class="text-end">http://www.opengis.net/def/crs/EPSG/0/4326</td></tr><tr><td></i>Spatial Resolution</td><td class="text-end">0.08333</td></tr><tr><td></i>Temporal Extent</td><td class="text-end">1961-01-01 to 2000-01-01</td></tr><tr><td></i>Parent Dataset</td><td class="text-end">Harvested Area and Yield for 175 Crops</td></tr><tr><td></i>Temporal Resolution</td><td class="text-end">P1M</td></tr><tr><td></i>Created</td><td class="text-end">February 29, 2022, 11:46 AM (UTC+01:00)<br></td></tr><tr><td></i>Definition</td><td class="text-end">GAEZ v 3.0 incorporates two important new global data sets on “Actual Yield and Production’ and “Yield and Production Gaps” between potentials and actual yield and production. Geo‐referenced global climate, soil and terrain data are combined into a land resources database, commonly assembled on the basis of global grids, typically at 5 arc‐minute and 30 arc‐second resolutions. Climatic data comprises precipitation, temperature, wind speed, sunshine hours and relative humidity, which are used to compile agronomically meaningful climate resources inventories including quantified thermal and moisture regimes in space and time.</td></tr></tbody>');
+		}
+
+		// dehovering Button "data1"
+		document.getElementById("data1").onmouseout = function() {
+			map.removeLayer(rect1);
+		}
+
+		// dehovering Button "data2"
+		document.getElementById("data2").onmouseout = function() {
+			map.removeLayer(rect2);
+		}
+
+		// dehovering Button "data3"
+		document.getElementById("data3").onmouseout = function() {
+			map.removeLayer(rect3);
+		}
+	</script> -->
+
 </body>
 
 </html>

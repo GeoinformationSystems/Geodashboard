@@ -6,35 +6,39 @@
 <script src='https://cdn.plot.ly/plotly-2.9.0.min.js'></script>
 <meta charset="utf-8" />
 </head>
-<body style="font-family: 'Open Sans';font-size: 13px;">
-	<div>
-		<input type="checkbox" id="l5" onclick="choose(this)"> <label
-			for="landsat5">GPW v4.0</label> <input type="checkbox" id="l6"
-			onclick="choose(this)"> <label for="landsat6">Dataset 
-			B</label> <input type="checkbox" id="l7" onclick="choose(this)"> <label
-			for="landsat7">GAEZ v3.0</label>
+<body style="font-family: 'Open Sans'; font-size: 13px;">
+	<div class="wrapper" style="width: 26em; height: 10em; float: left;">
+		<div>
+			<input type="checkbox" id="l5" onclick="choose(this)"> <label
+				for="landsat5">GPW v4.0</label> <input type="checkbox" id="l6"
+				onclick="choose(this)"> <label for="landsat6">Dataset
+				B</label> <input type="checkbox" id="l7" onclick="choose(this)"> <label
+				for="landsat7">GAEZ v3.0</label>
+		</div>
+		<fieldset style="width: 22em">
+			<div>
+				<input type="radio" id="om" name="Quality Metric" value="Omission"
+					onclick="choose(this)"> <label for="om"> Omission
+					as rate</label>
+			</div>
+			<div>
+				<input type="radio" id="com" name="Quality Metric"
+					value="Commission" onclick="choose(this)"> <label for="com">
+					Quantitative Attribute Accuracy as R²</label>
+			</div>
+			<div>
+				<input type="radio" id="qaa" name="Quality Metric"
+					value="Quantitative attribute accuracy" onclick="choose(this)">
+				<label for="qaa"> Quantitative Attribute Accuracy as RMSE</label>
+			</div>
+			<div>
+				<input type="radio" id="tcc" name="Quality Metric"
+					value="Thematic classification correctness" onclick="choose(this)">
+				<label for="tcc"> Spatial Resolution</label>
+			</div>
+		</fieldset>
 	</div>
-	<fieldset>
-		<div>
-			<input type="radio" id="om" name="Quality Metric" value="Omission"
-				onclick="choose(this)"> <label for="om"> Omission as rate</label>
-		</div>
-		<div>
-			<input type="radio" id="com" name="Quality Metric" value="Commission"
-				onclick="choose(this)"> <label for="com"> Quantitative Attribute Accuracy as R²</label>
-		</div>
-		<div>
-			<input type="radio" id="qaa" name="Quality Metric"
-				value="Quantitative attribute accuracy" onclick="choose(this)">
-			<label for="qaa"> Quantitative Attribute Accuracy as RMSE</label>
-		</div>
-		<div>
-			<input type="radio" id="tcc" name="Quality Metric"
-				value="Thematic classification correctness" onclick="choose(this)">
-			<label for="tcc"> Spatial Resolution</label>
-		</div>
-	</fieldset>
-	<div id='myDiv'>
+	<div id='myDiv' style="float: left">
 		<!--Plotly chart will be drawn inside this DIV -->
 	</div>
 </body>
@@ -147,6 +151,14 @@
 	function choose(e) {
 		if (document.getElementById("om").checked) {
 			layout = {
+				autosize : false,
+				width : 650,
+				height : 200,
+
+				margin : {
+					t : 20,
+					b : 20
+				},
 				yaxis : {
 					title : 'Omission as rate',
 					showlegend : false,
@@ -178,12 +190,22 @@
 				var del3 = omission.indexOf(sat7om);
 				omission.splice(del3, 1);
 			}
-			Plotly.newPlot('myDiv', omission, layout);
+			Plotly.newPlot('myDiv', omission, layout, {
+				displayModeBar : false
+			});
 		}
 		if (document.getElementById("com").checked) {
 			layout = {
+				autosize : false,
+				width : 650,
+				height : 200,
+
+				margin : {
+					t : 20,
+					b : 20
+				},
 				yaxis : {
-					title : 'Quantitative Attribute Accuracy as R²',
+					title : 'QAA as R²',
 					showlegend : false,
 					zeroline : false
 				},
@@ -213,12 +235,22 @@
 				var del3 = commission.indexOf(sat7com);
 				commission.splice(del3, 1);
 			}
-			Plotly.newPlot('myDiv', commission, layout);
+			Plotly.newPlot('myDiv', commission, layout, {
+				displayModeBar : false
+			});
 		}
 		if (document.getElementById("qaa").checked) {
 			layout = {
+				autosize : false,
+				width : 650,
+				height : 200,
+
+				margin : {
+					t : 20,
+					b : 20
+				},
 				yaxis : {
-					title : 'Quantitative Attribute Accuracy as RMSE',
+					title : 'QAA as RMSE',
 					showlegend : false,
 					zeroline : false
 				},
@@ -248,10 +280,20 @@
 				var del3 = quantitative.indexOf(sat7qaa);
 				quantitative.splice(del3, 1);
 			}
-			Plotly.newPlot('myDiv', quantitative, layout);
+			Plotly.newPlot('myDiv', quantitative, layout, {
+				displayModeBar : false
+			});
 		}
 		if (document.getElementById("tcc").checked) {
 			layout = {
+				autosize : false,
+				width : 650,
+				height : 200,
+
+				margin : {
+					t : 20,
+					b : 20
+				},
 				yaxis : {
 					title : 'Spatial Resolution',
 					showlegend : false,
@@ -283,7 +325,9 @@
 				var del3 = thematic.indexOf(sat7tcc);
 				thematic.splice(del3, 1);
 			}
-			Plotly.newPlot('myDiv', thematic, layout);
+			Plotly.newPlot('myDiv', thematic, layout, {
+				displayModeBar : false
+			});
 		}
 	}
 </script>
