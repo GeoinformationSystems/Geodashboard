@@ -23,6 +23,8 @@ Different graphs from Plotly.js are used for displaying data quality measures in
 	- GNU General Public License v3.0
 - Leaflet.js: https://leafletjs.com/
 	-  BSD 2-Clause "Simplified" License
+	
+For further information about the Geodashboard see the associated publication: https://doi.org/10.5194/agile-giss-3-34-2022.
 
 ## Contact
 Heiko Figgemeier (heiko.figgemeier@tu-dresden.de)
